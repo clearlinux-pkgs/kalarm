@@ -1,0 +1,18 @@
+ akonadi-contacts-dev
+ akonadi-dev
+ akonadi-mime-dev
+ boost-dev
+ kalarmcal-dev
+ kcalcore-dev
+ kcalutils-dev
+ kcontacts-dev
+ kglobalaccel-dev
+ kholidays-dev
+ kidentitymanagement-dev
+ kimap-dev
+ kmime-dev
+ kpimtextedit-dev
+ phonon-dev
+ qtx11extras-dev
+kdepim-apps-libs-dev
+kmailtransport-dev
