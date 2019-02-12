@@ -5,18 +5,18 @@
 # Source0 file verified with key 0xDBD2CE893E2D1C87 (cfeck@kde.org)
 #
 Name     : kalarm
-Version  : 18.08.0
-Release  : 3
-URL      : https://download.kde.org/stable/applications/18.08.0/src/kalarm-18.08.0.tar.xz
-Source0  : https://download.kde.org/stable/applications/18.08.0/src/kalarm-18.08.0.tar.xz
-Source99 : https://download.kde.org/stable/applications/18.08.0/src/kalarm-18.08.0.tar.xz.sig
-Summary  : No detailed summary available
+Version  : 18.12.2
+Release  : 4
+URL      : https://download.kde.org/stable/applications/18.12.2/src/kalarm-18.12.2.tar.xz
+Source0  : https://download.kde.org/stable/applications/18.12.2/src/kalarm-18.12.2.tar.xz
+Source99 : https://download.kde.org/stable/applications/18.12.2/src/kalarm-18.12.2.tar.xz.sig
+Summary  : Personal alarm scheduler
 Group    : Development/Tools
 License  : BSD-3-Clause GFDL-1.2 GPL-2.0 LGPL-2.1
-Requires: kalarm-bin
-Requires: kalarm-data
-Requires: kalarm-license
-Requires: kalarm-locales
+Requires: kalarm-bin = %{version}-%{release}
+Requires: kalarm-data = %{version}-%{release}
+Requires: kalarm-license = %{version}-%{release}
+Requires: kalarm-locales = %{version}-%{release}
 BuildRequires : akonadi-contacts-dev
 BuildRequires : akonadi-dev
 BuildRequires : akonadi-mime-dev
@@ -24,7 +24,6 @@ BuildRequires : boost-dev
 BuildRequires : buildreq-cmake
 BuildRequires : buildreq-kde
 BuildRequires : gpgme-dev
-BuildRequires : gpgme-extras
 BuildRequires : kalarmcal-dev
 BuildRequires : kcalcore-dev
 BuildRequires : kcalutils-dev
@@ -44,7 +43,7 @@ BuildRequires : mailcommon-dev
 BuildRequires : messagelib-dev
 BuildRequires : phonon-dev
 BuildRequires : pimcommon-dev
-BuildRequires : qtbase-dev qtbase-extras mesa-dev
+BuildRequires : qtbase-dev mesa-dev
 BuildRequires : qtx11extras-dev
 
 %description
@@ -55,8 +54,8 @@ KAlarm is a personal alarm message, audio, command and email scheduler.
 %package bin
 Summary: bin components for the kalarm package.
 Group: Binaries
-Requires: kalarm-data
-Requires: kalarm-license
+Requires: kalarm-data = %{version}-%{release}
+Requires: kalarm-license = %{version}-%{release}
 
 %description bin
 bin components for the kalarm package.
@@ -95,28 +94,28 @@ locales components for the kalarm package.
 
 
 %prep
-%setup -q -n kalarm-18.08.0
+%setup -q -n kalarm-18.12.2
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1535425729
-mkdir clr-build
+export SOURCE_DATE_EPOCH=1549936744
+mkdir -p clr-build
 pushd clr-build
 %cmake ..
 make  %{?_smp_mflags}
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1535425729
+export SOURCE_DATE_EPOCH=1549936744
 rm -rf %{buildroot}
-mkdir -p %{buildroot}/usr/share/doc/kalarm
-cp COPYING %{buildroot}/usr/share/doc/kalarm/COPYING
-cp COPYING.DOC %{buildroot}/usr/share/doc/kalarm/COPYING.DOC
-cp COPYING.LIB %{buildroot}/usr/share/doc/kalarm/COPYING.LIB
-cp cmake/modules/COPYING-CMAKE-SCRIPTS %{buildroot}/usr/share/doc/kalarm/cmake_modules_COPYING-CMAKE-SCRIPTS
+mkdir -p %{buildroot}/usr/share/package-licenses/kalarm
+cp COPYING %{buildroot}/usr/share/package-licenses/kalarm/COPYING
+cp COPYING.DOC %{buildroot}/usr/share/package-licenses/kalarm/COPYING.DOC
+cp COPYING.LIB %{buildroot}/usr/share/package-licenses/kalarm/COPYING.LIB
+cp cmake/modules/COPYING-CMAKE-SCRIPTS %{buildroot}/usr/share/package-licenses/kalarm/cmake_modules_COPYING-CMAKE-SCRIPTS
 pushd clr-build
 %make_install
 popd
@@ -137,6 +136,7 @@ popd
 /usr/share/config.kcfg/kalarmconfig.kcfg
 /usr/share/dbus-1/interfaces/org.kde.kalarm.kalarm.xml
 /usr/share/dbus-1/system-services/org.kde.kalarm.rtcwake.service
+/usr/share/dbus-1/system.d/org.kde.kalarm.rtcwake.conf
 /usr/share/icons/hicolor/128x128/apps/kalarm.png
 /usr/share/icons/hicolor/16x16/apps/kalarm.png
 /usr/share/icons/hicolor/22x22/apps/kalarm.png
@@ -161,6 +161,7 @@ popd
 /usr/share/kconf_update/kalarm.upd
 /usr/share/kxmlgui5/kalarm/kalarmui.rc
 /usr/share/metainfo/org.kde.kalarm.appdata.xml
+/usr/share/polkit-1/actions/org.kde.kalarm.rtcwake.policy
 /usr/share/xdg/autostart/kalarm.autostart.desktop
 /usr/share/xdg/kalarm.categories
 /usr/share/xdg/kalarm.renamecategories
@@ -203,11 +204,11 @@ popd
 /usr/share/doc/HTML/uk/kalarm/index.docbook
 
 %files license
-%defattr(-,root,root,-)
-/usr/share/doc/kalarm/COPYING
-/usr/share/doc/kalarm/COPYING.DOC
-/usr/share/doc/kalarm/COPYING.LIB
-/usr/share/doc/kalarm/cmake_modules_COPYING-CMAKE-SCRIPTS
+%defattr(0644,root,root,0755)
+/usr/share/package-licenses/kalarm/COPYING
+/usr/share/package-licenses/kalarm/COPYING.DOC
+/usr/share/package-licenses/kalarm/COPYING.LIB
+/usr/share/package-licenses/kalarm/cmake_modules_COPYING-CMAKE-SCRIPTS
 
 %files locales -f kalarm.lang
 %defattr(-,root,root,-)
