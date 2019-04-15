@@ -3,7 +3,7 @@ libKF5AkonadiCore.so.5
 libKF5AkonadiMime.so.5
 libKF5AkonadiWidgets.so.5
 libKF5AlarmCalendar.so.5
-libKF5Auth.so.5
+libKF5AuthCore.so.5
 libKF5CalendarCore.so.5
 libKF5CalendarUtils.so.5
 libKF5Codecs.so.5
