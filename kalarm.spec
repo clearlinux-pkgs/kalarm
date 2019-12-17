@@ -6,7 +6,7 @@
 #
 Name     : kalarm
 Version  : 19.12.0
-Release  : 17
+Release  : 18
 URL      : https://download.kde.org/stable/release-service/19.12.0/src/kalarm-19.12.0.tar.xz
 Source0  : https://download.kde.org/stable/release-service/19.12.0/src/kalarm-19.12.0.tar.xz
 Source1  : https://download.kde.org/stable/release-service/19.12.0/src/kalarm-19.12.0.tar.xz.sig
@@ -26,7 +26,7 @@ BuildRequires : buildreq-kde
 BuildRequires : gpgme-dev
 BuildRequires : gpgme-extras
 BuildRequires : kalarmcal-dev
-BuildRequires : kcalcore-dev
+BuildRequires : kcalendarcore-dev
 BuildRequires : kcalutils-dev
 BuildRequires : kcontacts-dev
 BuildRequires : kdepim-apps-libs-dev
@@ -103,10 +103,9 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1576609441
+export SOURCE_DATE_EPOCH=1576621482
 mkdir -p clr-build
 pushd clr-build
-# -Werror is for werrorists
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -120,7 +119,7 @@ make  %{?_smp_mflags}  VERBOSE=1
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1576609441
+export SOURCE_DATE_EPOCH=1576621482
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/kalarm
 cp %{_builddir}/kalarm-19.12.0/COPYING %{buildroot}/usr/share/package-licenses/kalarm/7c203dee3a03037da436df03c4b25b659c073976
