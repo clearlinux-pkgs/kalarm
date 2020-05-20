@@ -5,11 +5,11 @@
 # Source0 file verified with key 0xDBD2CE893E2D1C87 (cfeck@kde.org)
 #
 Name     : kalarm
-Version  : 20.04.0
-Release  : 23
-URL      : https://download.kde.org/stable/release-service/20.04.0/src/kalarm-20.04.0.tar.xz
-Source0  : https://download.kde.org/stable/release-service/20.04.0/src/kalarm-20.04.0.tar.xz
-Source1  : https://download.kde.org/stable/release-service/20.04.0/src/kalarm-20.04.0.tar.xz.sig
+Version  : 20.04.1
+Release  : 24
+URL      : https://download.kde.org/stable/release-service/20.04.1/src/kalarm-20.04.1.tar.xz
+Source0  : https://download.kde.org/stable/release-service/20.04.1/src/kalarm-20.04.1.tar.xz
+Source1  : https://download.kde.org/stable/release-service/20.04.1/src/kalarm-20.04.1.tar.xz.sig
 Summary  : Personal alarm scheduler
 Group    : Development/Tools
 License  : BSD-3-Clause GFDL-1.2 GPL-2.0 LGPL-2.1
@@ -23,20 +23,39 @@ BuildRequires : akonadi-mime-dev
 BuildRequires : boost-dev
 BuildRequires : buildreq-cmake
 BuildRequires : buildreq-kde
+BuildRequires : extra-cmake-modules-data
 BuildRequires : gpgme-dev
 BuildRequires : gpgme-extras
 BuildRequires : kalarmcal-dev
+BuildRequires : kauth-dev
 BuildRequires : kcalendarcore-dev
 BuildRequires : kcalutils-dev
+BuildRequires : kcmutils-dev
+BuildRequires : kcodecs-dev
+BuildRequires : kcompletion-dev
+BuildRequires : kconfig-dev
+BuildRequires : kconfigwidgets-dev
 BuildRequires : kcontacts-dev
+BuildRequires : kcrash-dev
+BuildRequires : kdbusaddons-dev
 BuildRequires : kdepim-apps-libs-dev
+BuildRequires : kdoctools-dev
 BuildRequires : kglobalaccel-dev
+BuildRequires : kguiaddons-dev
 BuildRequires : kholidays-dev
+BuildRequires : ki18n-dev
 BuildRequires : kidentitymanagement-dev
 BuildRequires : kimap-dev
+BuildRequires : kio-dev
+BuildRequires : kjobwidgets-dev
 BuildRequires : kmailtransport-dev
 BuildRequires : kmime-dev
+BuildRequires : knotifications-dev
 BuildRequires : kpimtextedit-dev
+BuildRequires : kservice-dev
+BuildRequires : kwidgetsaddons-dev
+BuildRequires : kwindowsystem-dev
+BuildRequires : kxmlgui-dev
 BuildRequires : libX11-dev libICE-dev libSM-dev libXau-dev libXcomposite-dev libXcursor-dev libXdamage-dev libXdmcp-dev libXext-dev libXfixes-dev libXft-dev libXi-dev libXinerama-dev libXi-dev libXmu-dev libXpm-dev libXrandr-dev libXrender-dev libXres-dev libXScrnSaver-dev libXt-dev libXtst-dev libXv-dev libXxf86misc-dev libXxf86vm-dev
 BuildRequires : libkdepim-dev
 BuildRequires : libkleo-dev
@@ -95,38 +114,37 @@ locales components for the kalarm package.
 
 
 %prep
-%setup -q -n kalarm-20.04.0
-cd %{_builddir}/kalarm-20.04.0
+%setup -q -n kalarm-20.04.1
+cd %{_builddir}/kalarm-20.04.1
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1587736613
+export SOURCE_DATE_EPOCH=1589946788
 mkdir -p clr-build
 pushd clr-build
-# -Werror is for werrorists
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
 export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
-export FCFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
-export FFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
+export FCFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 "
+export FFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 "
 export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=4 "
 %cmake ..
 make  %{?_smp_mflags}  VERBOSE=1
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1587736613
+export SOURCE_DATE_EPOCH=1589946788
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/kalarm
-cp %{_builddir}/kalarm-20.04.0/COPYING %{buildroot}/usr/share/package-licenses/kalarm/7c203dee3a03037da436df03c4b25b659c073976
-cp %{_builddir}/kalarm-20.04.0/COPYING.DOC %{buildroot}/usr/share/package-licenses/kalarm/1bd373e4851a93027ba70064bd7dbdc6827147e1
-cp %{_builddir}/kalarm-20.04.0/COPYING.LIB %{buildroot}/usr/share/package-licenses/kalarm/9a1929f4700d2407c70b507b3b2aaf6226a9543c
-cp %{_builddir}/kalarm-20.04.0/cmake/modules/COPYING-CMAKE-SCRIPTS %{buildroot}/usr/share/package-licenses/kalarm/ff3ed70db4739b3c6747c7f624fe2bad70802987
+cp %{_builddir}/kalarm-20.04.1/COPYING %{buildroot}/usr/share/package-licenses/kalarm/7c203dee3a03037da436df03c4b25b659c073976
+cp %{_builddir}/kalarm-20.04.1/COPYING.DOC %{buildroot}/usr/share/package-licenses/kalarm/1bd373e4851a93027ba70064bd7dbdc6827147e1
+cp %{_builddir}/kalarm-20.04.1/COPYING.LIB %{buildroot}/usr/share/package-licenses/kalarm/9a1929f4700d2407c70b507b3b2aaf6226a9543c
+cp %{_builddir}/kalarm-20.04.1/cmake/modules/COPYING-CMAKE-SCRIPTS %{buildroot}/usr/share/package-licenses/kalarm/ff3ed70db4739b3c6747c7f624fe2bad70802987
 pushd clr-build
 %make_install
 popd
