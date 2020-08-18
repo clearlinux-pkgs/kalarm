@@ -5,11 +5,11 @@
 # Source0 file verified with key 0xDBD2CE893E2D1C87 (cfeck@kde.org)
 #
 Name     : kalarm
-Version  : 20.04.2
-Release  : 25
-URL      : https://download.kde.org/stable/release-service/20.04.2/src/kalarm-20.04.2.tar.xz
-Source0  : https://download.kde.org/stable/release-service/20.04.2/src/kalarm-20.04.2.tar.xz
-Source1  : https://download.kde.org/stable/release-service/20.04.2/src/kalarm-20.04.2.tar.xz.sig
+Version  : 20.08.0
+Release  : 26
+URL      : https://download.kde.org/stable/release-service/20.08.0/src/kalarm-20.08.0.tar.xz
+Source0  : https://download.kde.org/stable/release-service/20.08.0/src/kalarm-20.08.0.tar.xz
+Source1  : https://download.kde.org/stable/release-service/20.08.0/src/kalarm-20.08.0.tar.xz.sig
 Summary  : Personal alarm scheduler
 Group    : Development/Tools
 License  : BSD-3-Clause GFDL-1.2 GPL-2.0 LGPL-2.1
@@ -114,15 +114,15 @@ locales components for the kalarm package.
 
 
 %prep
-%setup -q -n kalarm-20.04.2
-cd %{_builddir}/kalarm-20.04.2
+%setup -q -n kalarm-20.08.0
+cd %{_builddir}/kalarm-20.08.0
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1591972067
+export SOURCE_DATE_EPOCH=1597774972
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
@@ -134,17 +134,17 @@ export FCFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 "
 export FFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 "
 export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=4 "
 %cmake ..
-make  %{?_smp_mflags}  VERBOSE=1
+make  %{?_smp_mflags}
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1591972067
+export SOURCE_DATE_EPOCH=1597774972
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/kalarm
-cp %{_builddir}/kalarm-20.04.2/COPYING %{buildroot}/usr/share/package-licenses/kalarm/7c203dee3a03037da436df03c4b25b659c073976
-cp %{_builddir}/kalarm-20.04.2/COPYING.DOC %{buildroot}/usr/share/package-licenses/kalarm/1bd373e4851a93027ba70064bd7dbdc6827147e1
-cp %{_builddir}/kalarm-20.04.2/COPYING.LIB %{buildroot}/usr/share/package-licenses/kalarm/9a1929f4700d2407c70b507b3b2aaf6226a9543c
-cp %{_builddir}/kalarm-20.04.2/cmake/modules/COPYING-CMAKE-SCRIPTS %{buildroot}/usr/share/package-licenses/kalarm/ff3ed70db4739b3c6747c7f624fe2bad70802987
+cp %{_builddir}/kalarm-20.08.0/COPYING %{buildroot}/usr/share/package-licenses/kalarm/7c203dee3a03037da436df03c4b25b659c073976
+cp %{_builddir}/kalarm-20.08.0/COPYING.DOC %{buildroot}/usr/share/package-licenses/kalarm/1bd373e4851a93027ba70064bd7dbdc6827147e1
+cp %{_builddir}/kalarm-20.08.0/COPYING.LIB %{buildroot}/usr/share/package-licenses/kalarm/9a1929f4700d2407c70b507b3b2aaf6226a9543c
+cp %{_builddir}/kalarm-20.08.0/cmake/modules/COPYING-CMAKE-SCRIPTS %{buildroot}/usr/share/package-licenses/kalarm/ff3ed70db4739b3c6747c7f624fe2bad70802987
 pushd clr-build
 %make_install
 popd
@@ -204,7 +204,6 @@ popd
 /usr/share/doc/HTML/ca/kalarm/index.docbook
 /usr/share/doc/HTML/ca/kalarm/mainwindow-calendars.png
 /usr/share/doc/HTML/ca/kalarm/mainwindow.png
-/usr/share/doc/HTML/ca/kalarm/spinbox.png
 /usr/share/doc/HTML/de/kalarm/index.cache.bz2
 /usr/share/doc/HTML/de/kalarm/index.docbook
 /usr/share/doc/HTML/en/kalarm/alarmmessage.png
