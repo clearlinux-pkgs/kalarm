@@ -6,7 +6,7 @@
 #
 Name     : kalarm
 Version  : 20.12.1
-Release  : 30
+Release  : 31
 URL      : https://download.kde.org/stable/release-service/20.12.1/src/kalarm-20.12.1.tar.xz
 Source0  : https://download.kde.org/stable/release-service/20.12.1/src/kalarm-20.12.1.tar.xz
 Source1  : https://download.kde.org/stable/release-service/20.12.1/src/kalarm-20.12.1.tar.xz.sig
@@ -59,7 +59,7 @@ BuildRequires : kservice-dev
 BuildRequires : kwidgetsaddons-dev
 BuildRequires : kwindowsystem-dev
 BuildRequires : kxmlgui-dev
-BuildRequires : libX11-dev libICE-dev libSM-dev libXau-dev libXcomposite-dev libXcursor-dev libXdamage-dev libXdmcp-dev libXext-dev libXfixes-dev libXft-dev libXi-dev libXinerama-dev libXi-dev libXmu-dev libXpm-dev libXrandr-dev libXrender-dev libXres-dev libXScrnSaver-dev libXt-dev libXtst-dev libXv-dev libXxf86misc-dev libXxf86vm-dev
+BuildRequires : libX11-dev libICE-dev libSM-dev libXau-dev libXcomposite-dev libXcursor-dev libXdamage-dev libXdmcp-dev libXext-dev libXfixes-dev libXft-dev libXi-dev libXinerama-dev libXi-dev libXmu-dev libXpm-dev libXrandr-dev libXrender-dev libXres-dev libXScrnSaver-dev libXt-dev libXtst-dev libXv-dev libXxf86vm-dev
 BuildRequires : libkdepim-dev
 BuildRequires : libkleo-dev
 BuildRequires : mailcommon-dev
