@@ -6,7 +6,7 @@
 #
 Name     : kalarm
 Version  : 21.12.1
-Release  : 41
+Release  : 42
 URL      : https://download.kde.org/stable/release-service/21.12.1/src/kalarm-21.12.1.tar.xz
 Source0  : https://download.kde.org/stable/release-service/21.12.1/src/kalarm-21.12.1.tar.xz
 Source1  : https://download.kde.org/stable/release-service/21.12.1/src/kalarm-21.12.1.tar.xz.sig
@@ -125,7 +125,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1642021065
+export SOURCE_DATE_EPOCH=1643435369
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
@@ -141,7 +141,7 @@ make  %{?_smp_mflags}
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1642021065
+export SOURCE_DATE_EPOCH=1643435369
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/kalarm
 cp %{_builddir}/kalarm-21.12.1/CMakePresets.json.license %{buildroot}/usr/share/package-licenses/kalarm/29fb05b49e12a380545499938c4879440bd8851e
@@ -191,6 +191,7 @@ popd
 /usr/share/polkit-1/actions/org.kde.kalarm.rtcwake.policy
 /usr/share/qlogging-categories5/kalarm.categories
 /usr/share/qlogging-categories5/kalarm.renamecategories
+/usr/share/xdg/autostart/kalarm.autostart.desktop
 
 %files doc
 %defattr(0644,root,root,0755)
