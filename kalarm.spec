@@ -5,16 +5,17 @@
 # Source0 file verified with key 0xBB463350D6EF31EF (heiko@shruuf.de)
 #
 Name     : kalarm
-Version  : 21.12.3
-Release  : 44
-URL      : https://download.kde.org/stable/release-service/21.12.3/src/kalarm-21.12.3.tar.xz
-Source0  : https://download.kde.org/stable/release-service/21.12.3/src/kalarm-21.12.3.tar.xz
-Source1  : https://download.kde.org/stable/release-service/21.12.3/src/kalarm-21.12.3.tar.xz.sig
+Version  : 22.04.0
+Release  : 45
+URL      : https://download.kde.org/stable/release-service/22.04.0/src/kalarm-22.04.0.tar.xz
+Source0  : https://download.kde.org/stable/release-service/22.04.0/src/kalarm-22.04.0.tar.xz
+Source1  : https://download.kde.org/stable/release-service/22.04.0/src/kalarm-22.04.0.tar.xz.sig
 Summary  : Personal alarm scheduler
 Group    : Development/Tools
 License  : BSD-3-Clause CC0-1.0 GFDL-1.2 GPL-2.0 LGPL-2.0
 Requires: kalarm-bin = %{version}-%{release}
 Requires: kalarm-data = %{version}-%{release}
+Requires: kalarm-lib = %{version}-%{release}
 Requires: kalarm-license = %{version}-%{release}
 Requires: kalarm-locales = %{version}-%{release}
 BuildRequires : akonadi-contacts-dev
@@ -66,7 +67,6 @@ BuildRequires : mailcommon-dev
 BuildRequires : messagelib-dev
 BuildRequires : phonon-dev
 BuildRequires : pimcommon-dev
-BuildRequires : qtbase-dev mesa-dev
 BuildRequires : qtx11extras-dev
 
 %description
@@ -100,6 +100,16 @@ Group: Documentation
 doc components for the kalarm package.
 
 
+%package lib
+Summary: lib components for the kalarm package.
+Group: Libraries
+Requires: kalarm-data = %{version}-%{release}
+Requires: kalarm-license = %{version}-%{release}
+
+%description lib
+lib components for the kalarm package.
+
+
 %package license
 Summary: license components for the kalarm package.
 Group: Default
@@ -117,15 +127,15 @@ locales components for the kalarm package.
 
 
 %prep
-%setup -q -n kalarm-21.12.3
-cd %{_builddir}/kalarm-21.12.3
+%setup -q -n kalarm-22.04.0
+cd %{_builddir}/kalarm-22.04.0
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1646605350
+export SOURCE_DATE_EPOCH=1650838500
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
@@ -141,14 +151,15 @@ make  %{?_smp_mflags}
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1646605350
+export SOURCE_DATE_EPOCH=1650838500
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/kalarm
-cp %{_builddir}/kalarm-21.12.3/CMakePresets.json.license %{buildroot}/usr/share/package-licenses/kalarm/29fb05b49e12a380545499938c4879440bd8851e
-cp %{_builddir}/kalarm-21.12.3/LICENSES/CC0-1.0.txt %{buildroot}/usr/share/package-licenses/kalarm/8287b608d3fa40ef401339fd907ca1260c964123
-cp %{_builddir}/kalarm-21.12.3/LICENSES/GFDL-1.2-or-later.txt %{buildroot}/usr/share/package-licenses/kalarm/7697008f58568e61e7598e796eafc2a997503fde
-cp %{_builddir}/kalarm-21.12.3/LICENSES/GPL-2.0-or-later.txt %{buildroot}/usr/share/package-licenses/kalarm/e712eadfab0d2357c0f50f599ef35ee0d87534cb
-cp %{_builddir}/kalarm-21.12.3/LICENSES/LGPL-2.0-or-later.txt %{buildroot}/usr/share/package-licenses/kalarm/20079e8f79713dce80ab09774505773c926afa2a
+cp %{_builddir}/kalarm-22.04.0/CMakePresets.json.license %{buildroot}/usr/share/package-licenses/kalarm/c085897bc39e05746ffd2d889a6e84ff1b7ae2d9
+cp %{_builddir}/kalarm-22.04.0/LICENSES/BSD-3-Clause.txt %{buildroot}/usr/share/package-licenses/kalarm/9950d3fdce1cff1f71212fb5abd31453c6ee2f8c
+cp %{_builddir}/kalarm-22.04.0/LICENSES/CC0-1.0.txt %{buildroot}/usr/share/package-licenses/kalarm/8287b608d3fa40ef401339fd907ca1260c964123
+cp %{_builddir}/kalarm-22.04.0/LICENSES/GFDL-1.2-or-later.txt %{buildroot}/usr/share/package-licenses/kalarm/7697008f58568e61e7598e796eafc2a997503fde
+cp %{_builddir}/kalarm-22.04.0/LICENSES/GPL-2.0-or-later.txt %{buildroot}/usr/share/package-licenses/kalarm/e712eadfab0d2357c0f50f599ef35ee0d87534cb
+cp %{_builddir}/kalarm-22.04.0/LICENSES/LGPL-2.0-or-later.txt %{buildroot}/usr/share/package-licenses/kalarm/20079e8f79713dce80ab09774505773c926afa2a
 pushd clr-build
 %make_install
 popd
@@ -224,19 +235,23 @@ popd
 /usr/share/doc/HTML/pt/kalarm/index.docbook
 /usr/share/doc/HTML/pt_BR/kalarm/index.cache.bz2
 /usr/share/doc/HTML/pt_BR/kalarm/index.docbook
-/usr/share/doc/HTML/ru/kalarm/index.cache.bz2
-/usr/share/doc/HTML/ru/kalarm/index.docbook
 /usr/share/doc/HTML/sv/kalarm/index.cache.bz2
 /usr/share/doc/HTML/sv/kalarm/index.docbook
 /usr/share/doc/HTML/uk/kalarm/index.cache.bz2
 /usr/share/doc/HTML/uk/kalarm/index.docbook
 
+%files lib
+%defattr(-,root,root,-)
+/usr/lib64/libkalarmprivate.so.5
+/usr/lib64/libkalarmprivate.so.5.20.0
+
 %files license
 %defattr(0644,root,root,0755)
 /usr/share/package-licenses/kalarm/20079e8f79713dce80ab09774505773c926afa2a
-/usr/share/package-licenses/kalarm/29fb05b49e12a380545499938c4879440bd8851e
 /usr/share/package-licenses/kalarm/7697008f58568e61e7598e796eafc2a997503fde
 /usr/share/package-licenses/kalarm/8287b608d3fa40ef401339fd907ca1260c964123
+/usr/share/package-licenses/kalarm/9950d3fdce1cff1f71212fb5abd31453c6ee2f8c
+/usr/share/package-licenses/kalarm/c085897bc39e05746ffd2d889a6e84ff1b7ae2d9
 /usr/share/package-licenses/kalarm/e712eadfab0d2357c0f50f599ef35ee0d87534cb
 
 %files locales -f kalarm.lang
