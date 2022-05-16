@@ -5,11 +5,11 @@
 # Source0 file verified with key 0xBB463350D6EF31EF (heiko@shruuf.de)
 #
 Name     : kalarm
-Version  : 22.04.0
-Release  : 45
-URL      : https://download.kde.org/stable/release-service/22.04.0/src/kalarm-22.04.0.tar.xz
-Source0  : https://download.kde.org/stable/release-service/22.04.0/src/kalarm-22.04.0.tar.xz
-Source1  : https://download.kde.org/stable/release-service/22.04.0/src/kalarm-22.04.0.tar.xz.sig
+Version  : 22.04.1
+Release  : 46
+URL      : https://download.kde.org/stable/release-service/22.04.1/src/kalarm-22.04.1.tar.xz
+Source0  : https://download.kde.org/stable/release-service/22.04.1/src/kalarm-22.04.1.tar.xz
+Source1  : https://download.kde.org/stable/release-service/22.04.1/src/kalarm-22.04.1.tar.xz.sig
 Summary  : Personal alarm scheduler
 Group    : Development/Tools
 License  : BSD-3-Clause CC0-1.0 GFDL-1.2 GPL-2.0 LGPL-2.0
@@ -127,15 +127,15 @@ locales components for the kalarm package.
 
 
 %prep
-%setup -q -n kalarm-22.04.0
-cd %{_builddir}/kalarm-22.04.0
+%setup -q -n kalarm-22.04.1
+cd %{_builddir}/kalarm-22.04.1
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1650838500
+export SOURCE_DATE_EPOCH=1652667562
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
@@ -151,15 +151,15 @@ make  %{?_smp_mflags}
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1650838500
+export SOURCE_DATE_EPOCH=1652667562
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/kalarm
-cp %{_builddir}/kalarm-22.04.0/CMakePresets.json.license %{buildroot}/usr/share/package-licenses/kalarm/c085897bc39e05746ffd2d889a6e84ff1b7ae2d9
-cp %{_builddir}/kalarm-22.04.0/LICENSES/BSD-3-Clause.txt %{buildroot}/usr/share/package-licenses/kalarm/9950d3fdce1cff1f71212fb5abd31453c6ee2f8c
-cp %{_builddir}/kalarm-22.04.0/LICENSES/CC0-1.0.txt %{buildroot}/usr/share/package-licenses/kalarm/8287b608d3fa40ef401339fd907ca1260c964123
-cp %{_builddir}/kalarm-22.04.0/LICENSES/GFDL-1.2-or-later.txt %{buildroot}/usr/share/package-licenses/kalarm/7697008f58568e61e7598e796eafc2a997503fde
-cp %{_builddir}/kalarm-22.04.0/LICENSES/GPL-2.0-or-later.txt %{buildroot}/usr/share/package-licenses/kalarm/e712eadfab0d2357c0f50f599ef35ee0d87534cb
-cp %{_builddir}/kalarm-22.04.0/LICENSES/LGPL-2.0-or-later.txt %{buildroot}/usr/share/package-licenses/kalarm/20079e8f79713dce80ab09774505773c926afa2a
+cp %{_builddir}/kalarm-22.04.1/CMakePresets.json.license %{buildroot}/usr/share/package-licenses/kalarm/c085897bc39e05746ffd2d889a6e84ff1b7ae2d9
+cp %{_builddir}/kalarm-22.04.1/LICENSES/BSD-3-Clause.txt %{buildroot}/usr/share/package-licenses/kalarm/9950d3fdce1cff1f71212fb5abd31453c6ee2f8c
+cp %{_builddir}/kalarm-22.04.1/LICENSES/CC0-1.0.txt %{buildroot}/usr/share/package-licenses/kalarm/8287b608d3fa40ef401339fd907ca1260c964123
+cp %{_builddir}/kalarm-22.04.1/LICENSES/GFDL-1.2-or-later.txt %{buildroot}/usr/share/package-licenses/kalarm/7697008f58568e61e7598e796eafc2a997503fde
+cp %{_builddir}/kalarm-22.04.1/LICENSES/GPL-2.0-or-later.txt %{buildroot}/usr/share/package-licenses/kalarm/e712eadfab0d2357c0f50f599ef35ee0d87534cb
+cp %{_builddir}/kalarm-22.04.1/LICENSES/LGPL-2.0-or-later.txt %{buildroot}/usr/share/package-licenses/kalarm/20079e8f79713dce80ab09774505773c926afa2a
 pushd clr-build
 %make_install
 popd
@@ -243,7 +243,7 @@ popd
 %files lib
 %defattr(-,root,root,-)
 /usr/lib64/libkalarmprivate.so.5
-/usr/lib64/libkalarmprivate.so.5.20.0
+/usr/lib64/libkalarmprivate.so.5.20.1
 
 %files license
 %defattr(0644,root,root,0755)
