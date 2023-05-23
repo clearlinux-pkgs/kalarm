@@ -6,11 +6,11 @@
 # Source0 file verified with key 0xBB463350D6EF31EF (heiko@shruuf.de)
 #
 Name     : kalarm
-Version  : 23.04.0
-Release  : 58
-URL      : https://download.kde.org/stable/release-service/23.04.0/src/kalarm-23.04.0.tar.xz
-Source0  : https://download.kde.org/stable/release-service/23.04.0/src/kalarm-23.04.0.tar.xz
-Source1  : https://download.kde.org/stable/release-service/23.04.0/src/kalarm-23.04.0.tar.xz.sig
+Version  : 23.04.1
+Release  : 59
+URL      : https://download.kde.org/stable/release-service/23.04.1/src/kalarm-23.04.1.tar.xz
+Source0  : https://download.kde.org/stable/release-service/23.04.1/src/kalarm-23.04.1.tar.xz
+Source1  : https://download.kde.org/stable/release-service/23.04.1/src/kalarm-23.04.1.tar.xz.sig
 Summary  : Personal alarm scheduler
 Group    : Development/Tools
 License  : BSD-3-Clause CC0-1.0 GFDL-1.2 GPL-2.0 LGPL-2.0
@@ -113,31 +113,48 @@ locales components for the kalarm package.
 
 
 %prep
-%setup -q -n kalarm-23.04.0
-cd %{_builddir}/kalarm-23.04.0
+%setup -q -n kalarm-23.04.1
+cd %{_builddir}/kalarm-23.04.1
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1682112644
+export SOURCE_DATE_EPOCH=1684876974
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
-export CFLAGS="$CFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz "
-export FCFLAGS="$FFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz "
-export FFLAGS="$FFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz "
-export CXXFLAGS="$CXXFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz "
+export CFLAGS="$CFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
+export FCFLAGS="$FFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
+export FFLAGS="$FFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
+export CXXFLAGS="$CXXFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
+%cmake ..
+make  %{?_smp_mflags}
+popd
+mkdir -p clr-build-avx2
+pushd clr-build-avx2
+export GCC_IGNORE_WERROR=1
+export AR=gcc-ar
+export RANLIB=gcc-ranlib
+export NM=gcc-nm
+export CFLAGS="$CFLAGS -O3 -Wl,-z,x86-64-v3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz=zstd -march=x86-64-v3 "
+export FCFLAGS="$FFLAGS -O3 -Wl,-z,x86-64-v3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz=zstd -march=x86-64-v3 "
+export FFLAGS="$FFLAGS -O3 -Wl,-z,x86-64-v3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz=zstd -march=x86-64-v3 "
+export CXXFLAGS="$CXXFLAGS -O3 -Wl,-z,x86-64-v3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz=zstd -march=x86-64-v3 "
+export CFLAGS="$CFLAGS -march=x86-64-v3 -m64 -Wl,-z,x86-64-v3"
+export CXXFLAGS="$CXXFLAGS -march=x86-64-v3 -m64 -Wl,-z,x86-64-v3"
+export FFLAGS="$FFLAGS -march=x86-64-v3 -m64 -Wl,-z,x86-64-v3"
+export FCFLAGS="$FCFLAGS -march=x86-64-v3 -m64 -Wl,-z,x86-64-v3"
 %cmake ..
 make  %{?_smp_mflags}
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1682112644
+export SOURCE_DATE_EPOCH=1684876974
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/kalarm
 cp %{_builddir}/kalarm-%{version}/CMakePresets.json.license %{buildroot}/usr/share/package-licenses/kalarm/c085897bc39e05746ffd2d889a6e84ff1b7ae2d9 || :
@@ -146,17 +163,24 @@ cp %{_builddir}/kalarm-%{version}/LICENSES/CC0-1.0.txt %{buildroot}/usr/share/pa
 cp %{_builddir}/kalarm-%{version}/LICENSES/GFDL-1.2-or-later.txt %{buildroot}/usr/share/package-licenses/kalarm/7697008f58568e61e7598e796eafc2a997503fde || :
 cp %{_builddir}/kalarm-%{version}/LICENSES/GPL-2.0-or-later.txt %{buildroot}/usr/share/package-licenses/kalarm/e712eadfab0d2357c0f50f599ef35ee0d87534cb || :
 cp %{_builddir}/kalarm-%{version}/LICENSES/LGPL-2.0-or-later.txt %{buildroot}/usr/share/package-licenses/kalarm/20079e8f79713dce80ab09774505773c926afa2a || :
+pushd clr-build-avx2
+%make_install_v3  || :
+popd
 pushd clr-build
 %make_install
 popd
 %find_lang kalarm
+/usr/bin/elf-move.py avx2 %{buildroot}-v3 %{buildroot} %{buildroot}/usr/share/clear/filemap/filemap-%{name}
 
 %files
 %defattr(-,root,root,-)
+/V3/usr/lib64/libexec/kauth/kalarm_helper
 /usr/lib64/libexec/kauth/kalarm_helper
 
 %files bin
 %defattr(-,root,root,-)
+/V3/usr/bin/kalarm
+/V3/usr/bin/kalarmautostart
 /usr/bin/kalarm
 /usr/bin/kalarmautostart
 
@@ -230,10 +254,15 @@ popd
 
 %files lib
 %defattr(-,root,root,-)
+/V3/usr/lib64/libkalarmcalendar.so.5
+/V3/usr/lib64/libkalarmcalendar.so.5.23.1
+/V3/usr/lib64/libkalarmplugin.so.5
+/V3/usr/lib64/libkalarmplugin.so.5.23.1
+/V3/usr/lib64/qt5/plugins/pim5/kalarm/akonadiplugin.so
 /usr/lib64/libkalarmcalendar.so.5
-/usr/lib64/libkalarmcalendar.so.5.23.0
+/usr/lib64/libkalarmcalendar.so.5.23.1
 /usr/lib64/libkalarmplugin.so.5
-/usr/lib64/libkalarmplugin.so.5.23.0
+/usr/lib64/libkalarmplugin.so.5.23.1
 /usr/lib64/qt5/plugins/pim5/kalarm/akonadiplugin.so
 
 %files license
