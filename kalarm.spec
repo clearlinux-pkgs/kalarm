@@ -6,11 +6,11 @@
 # Source0 file verified with key 0xBB463350D6EF31EF (heiko@shruuf.de)
 #
 Name     : kalarm
-Version  : 23.08.0
-Release  : 63
-URL      : https://download.kde.org/stable/release-service/23.08.0/src/kalarm-23.08.0.tar.xz
-Source0  : https://download.kde.org/stable/release-service/23.08.0/src/kalarm-23.08.0.tar.xz
-Source1  : https://download.kde.org/stable/release-service/23.08.0/src/kalarm-23.08.0.tar.xz.sig
+Version  : 23.08.1
+Release  : 64
+URL      : https://download.kde.org/stable/release-service/23.08.1/src/kalarm-23.08.1.tar.xz
+Source0  : https://download.kde.org/stable/release-service/23.08.1/src/kalarm-23.08.1.tar.xz
+Source1  : https://download.kde.org/stable/release-service/23.08.1/src/kalarm-23.08.1.tar.xz.sig
 Summary  : Personal alarm scheduler
 Group    : Development/Tools
 License  : BSD-3-Clause CC0-1.0 GFDL-1.2 GPL-2.0 LGPL-2.0
@@ -113,15 +113,15 @@ locales components for the kalarm package.
 
 
 %prep
-%setup -q -n kalarm-23.08.0
-cd %{_builddir}/kalarm-23.08.0
+%setup -q -n kalarm-23.08.1
+cd %{_builddir}/kalarm-23.08.1
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1693241669
+export SOURCE_DATE_EPOCH=1695099821
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
@@ -154,7 +154,7 @@ make  %{?_smp_mflags}
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1693241669
+export SOURCE_DATE_EPOCH=1695099821
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/kalarm
 cp %{_builddir}/kalarm-%{version}/CMakePresets.json.license %{buildroot}/usr/share/package-licenses/kalarm/c085897bc39e05746ffd2d889a6e84ff1b7ae2d9 || :
@@ -260,13 +260,13 @@ popd
 
 %files lib
 %defattr(-,root,root,-)
-/V3/usr/lib64/libkalarmcalendar.so.5.24.0
-/V3/usr/lib64/libkalarmplugin.so.5.24.0
+/V3/usr/lib64/libkalarmcalendar.so.5.24.1
+/V3/usr/lib64/libkalarmplugin.so.5.24.1
 /V3/usr/lib64/qt5/plugins/pim5/kalarm/akonadiplugin.so
 /usr/lib64/libkalarmcalendar.so.5
-/usr/lib64/libkalarmcalendar.so.5.24.0
+/usr/lib64/libkalarmcalendar.so.5.24.1
 /usr/lib64/libkalarmplugin.so.5
-/usr/lib64/libkalarmplugin.so.5.24.0
+/usr/lib64/libkalarmplugin.so.5.24.1
 /usr/lib64/qt5/plugins/pim5/kalarm/akonadiplugin.so
 
 %files license
