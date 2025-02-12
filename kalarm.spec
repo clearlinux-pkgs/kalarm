@@ -9,7 +9,7 @@
 #
 Name     : kalarm
 Version  : 24.12.2
-Release  : 86
+Release  : 87
 URL      : https://download.kde.org/stable/release-service/24.12.2/src/kalarm-24.12.2.tar.xz
 Source0  : https://download.kde.org/stable/release-service/24.12.2/src/kalarm-24.12.2.tar.xz
 Source1  : https://download.kde.org/stable/release-service/24.12.2/src/kalarm-24.12.2.tar.xz.sig
@@ -76,7 +76,7 @@ BuildRequires : messagelib-dev
 BuildRequires : phonon-dev
 BuildRequires : pimcommon-dev
 BuildRequires : pkg-config
-BuildRequires : pkgconfig(libvlc)
+BuildRequires : pkgconfig(mpv)
 BuildRequires : qt6base-dev
 BuildRequires : qtx11extras-dev
 # Suppress stripping binaries
@@ -157,7 +157,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1739162865
+export SOURCE_DATE_EPOCH=1739389136
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
@@ -175,7 +175,9 @@ FCFLAGS="$CLEAR_INTERMEDIATE_FCFLAGS"
 ASFLAGS="$CLEAR_INTERMEDIATE_ASFLAGS"
 LDFLAGS="$CLEAR_INTERMEDIATE_LDFLAGS"
 export GOAMD64=v2
-%cmake .. -DQT_MAJOR_VERSION=6  -G 'Unix Makefiles'
+%cmake .. -DQT_MAJOR_VERSION=6 \
+-DENABLE_LIBVLC=OFF \
+-DENABLE_LIBMPV=ON  -G 'Unix Makefiles'
 make  %{?_smp_mflags}
 popd
 pushd ../buildavx2/
@@ -200,7 +202,9 @@ CFLAGS="$CLEAR_INTERMEDIATE_CFLAGS -march=x86-64-v3 -Wl,-z,x86-64-v3 "
 CXXFLAGS="$CLEAR_INTERMEDIATE_CXXFLAGS -march=x86-64-v3 -Wl,-z,x86-64-v3 "
 FFLAGS="$CLEAR_INTERMEDIATE_FFLAGS -march=x86-64-v3 -Wl,-z,x86-64-v3 "
 FCFLAGS="$CLEAR_INTERMEDIATE_FCFLAGS -march=x86-64-v3 "
-%cmake .. -DQT_MAJOR_VERSION=6  -G 'Unix Makefiles'
+%cmake .. -DQT_MAJOR_VERSION=6 \
+-DENABLE_LIBVLC=OFF \
+-DENABLE_LIBMPV=ON  -G 'Unix Makefiles'
 make  %{?_smp_mflags}
 popd
 popd
@@ -220,7 +224,7 @@ FFLAGS="$CLEAR_INTERMEDIATE_FFLAGS"
 FCFLAGS="$CLEAR_INTERMEDIATE_FCFLAGS"
 ASFLAGS="$CLEAR_INTERMEDIATE_ASFLAGS"
 LDFLAGS="$CLEAR_INTERMEDIATE_LDFLAGS"
-export SOURCE_DATE_EPOCH=1739162865
+export SOURCE_DATE_EPOCH=1739389136
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/kalarm
 cp %{_builddir}/kalarm-%{version}/CMakePresets.json.license %{buildroot}/usr/share/package-licenses/kalarm/c085897bc39e05746ffd2d889a6e84ff1b7ae2d9 || :
